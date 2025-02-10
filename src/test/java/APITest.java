@@ -16,7 +16,7 @@ String URL = "https://jsonplaceholder.typicode.com/posts";
                 .when()
                 .get("https://jsonplaceholder.typicode.com/posts")
                 .then()
-                .statusCode(200);  // Status kodunun 200 OK olduğunu doğrulama
+                .statusCode(200);
     }
 
     @Test(priority = 2)
@@ -25,10 +25,10 @@ String URL = "https://jsonplaceholder.typicode.com/posts";
                 .when()
                 .get("https://jsonplaceholder.typicode.com/posts")
                 .then()
-                .body("[0]", hasKey("userId"))  // İlk öğenin "userId" alanına sahip olduğunu doğrula
-                .body("[0]", hasKey("id"))      // İlk öğenin "id" alanına sahip olduğunu doğrula
-                .body("[0]", hasKey("title"))   // İlk öğenin "title" alanına sahip olduğunu doğrula
-                .body("[0]", hasKey("body"));   // İlk öğenin "body" alanına sahip olduğunu doğrula
+                .body("[0]", hasKey("userId"))
+                .body("[0]", hasKey("id"))
+                .body("[0]", hasKey("title"))
+                .body("[0]", hasKey("body"));
     }
     @Test(priority = 3)
     public void ValidationOfaSpecificValueTest()  {
@@ -42,19 +42,19 @@ String URL = "https://jsonplaceholder.typicode.com/posts";
     public void ListLengthValidationTest()  {
         given()
                 .when()
-                .get("https://jsonplaceholder.typicode.com/posts")  // posts endpoint'ine istek gönderiyoruz
+                .get("https://jsonplaceholder.typicode.com/posts")
                 .then()
-                .statusCode(200)  // Yanıtın 200 OK olduğunu doğruluyoruz
-                .body("$", hasSize(greaterThanOrEqualTo(10)));  // JSON dizisinin uzunluğunun en az 10 olduğunu doğruluyoruz
+                .statusCode(200)
+                .body("$", hasSize(greaterThanOrEqualTo(10)));
     }
     @Test(priority = 5)
     public void DynamicDataValidationTest()  {
         given()
                 .when()
-                .get("https://jsonplaceholder.typicode.com/posts")  // posts endpoint'ine istek gönderiyoruz
+                .get("https://jsonplaceholder.typicode.com/posts")
                 .then()
-                .statusCode(200)  // Yanıtın 200 OK olduğunu doğruluyoruz
-                .body("userId", everyItem(greaterThan(0)));  // Tüm userId değerlerinin pozitif olduğunu doğruluyoruz
+                .statusCode(200)
+                .body("userId", everyItem(greaterThan(0)));
     }
 
 }
