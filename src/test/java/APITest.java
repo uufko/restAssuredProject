@@ -14,7 +14,7 @@ String URL = "https://jsonplaceholder.typicode.com/posts";
         //response.prettyPrint();
         RestAssured.given()
                 .when()
-                .get("https://jsonplaceholder.typicode.com/posts")
+                .get(URL)
                 .then()
                 .statusCode(200);
     }
@@ -23,7 +23,7 @@ String URL = "https://jsonplaceholder.typicode.com/posts";
     public void JSONStructureValidationTest()  {
         given()
                 .when()
-                .get("https://jsonplaceholder.typicode.com/posts")
+                .get(URL)
                 .then()
                 .body("[0]", hasKey("userId"))
                 .body("[0]", hasKey("id"))
@@ -34,7 +34,7 @@ String URL = "https://jsonplaceholder.typicode.com/posts";
     public void ValidationOfaSpecificValueTest()  {
         given()
                 .when()
-                .get("https://jsonplaceholder.typicode.com/posts/1")
+                .get(URL+"/1")
                 .then()
                 .body("title", equalTo("sunt aut facere repellat provident occaecati excepturi optio reprehenderit"));
     }
@@ -42,7 +42,7 @@ String URL = "https://jsonplaceholder.typicode.com/posts";
     public void ListLengthValidationTest()  {
         given()
                 .when()
-                .get("https://jsonplaceholder.typicode.com/posts")
+                .get(URL)
                 .then()
                 .statusCode(200)
                 .body("$", hasSize(greaterThanOrEqualTo(10)));
@@ -51,7 +51,7 @@ String URL = "https://jsonplaceholder.typicode.com/posts";
     public void DynamicDataValidationTest()  {
         given()
                 .when()
-                .get("https://jsonplaceholder.typicode.com/posts")
+                .get(URL)
                 .then()
                 .statusCode(200)
                 .body("userId", everyItem(greaterThan(0)));
